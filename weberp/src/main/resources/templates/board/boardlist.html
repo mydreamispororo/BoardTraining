@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 리스트</title>
+</head>
+<style>
+    body {
+        line-height:3em;  
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    h1 {
+        
+        text-align: center;
+    }
+
+    .layout {
+        width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 14px;
+        height: 35px;
+        vertical-align: middle;
+        line-height: 30px;
+        background-color: #cdcdce;
+    }
+
+    thead {
+        list-style:none;
+        text-align:center;
+        padding:0;
+        margin:0;
+    }
+
+    thead tr th {
+        font-weight: bold;
+        text-align: center;
+        clear: both;
+        padding: 0px auto;
+        position: relative;
+        min-width: 40px;
+        width: 500px;
+        border-bottom: 1px solid rgb(66, 56, 56);
+        vertical-align: baseline;
+    }
+
+
+    .divPaging {
+        clear:both; 
+        margin:0 auto; 
+        width:220px; 
+        height:50px;
+    }
+
+    .divPaging div {
+        float:left;
+        width: 30px;
+        margin:0 auto;
+        text-align:center;
+    }
+
+    .liSearchOption {
+        clear:both;
+    }
+    
+    .liSearchOption div {
+        margin:0 auto; 
+        margin-top: 30px; 
+        width:auto; 
+        height:100px;
+    }
+
+    .left {
+        text-align : left;
+    }
+
+
+    .btn-layout btn-main, btn-list {
+        background-color: #5c5cd2;
+        cursor: pointer;
+        border-color: #5a5b5e;
+        color: #000;
+        position: fixed;
+
+        width:200px; 
+        height:50px;
+        top:0;
+        left:0;
+        height: 80px;
+        width: 100%;
+        background-color: gray;
+    }
+
+</style>
+<body>
+    <h1>게시판 리스트 입니다.</h1>
+
+    <div class="layout">
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>작성자</th>
+                    <th>제목</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="weberp : ${list}">
+                    <td th:text="${weberp.erpNum}">1</td>
+                    <td>
+                        <a th:text="${weberp.erpId}"></a>
+                    </td>
+                    <td>
+                        <a th:text="${weberp.erpTitle}" th:href="@{/board/view(erpNum=${weberp.erpNum})}"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 게시판 페이징 영역 -->
+<!--        <li>-->
+<!--            <div class="divPaging">-->
+<!--                <div>◀</div>-->
+<!--                <div><b>1</b></div>-->
+<!--                <div>2</div>-->
+<!--                <div>3</div>-->
+<!--                <div>4</div>-->
+<!--                <div>5</div>-->
+<!--                <div>▶</div>-->
+<!--            </div>-->
+<!--        </li>-->
+
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1})}" th:text="${page}"></a>
+            <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+        </th:block>
+
+        <!-- 검색 폼 영역 -->
+        <li class='liSearchOption'>
+            <div>
+                <select class='selSearchOption' >
+                    <option value='A'>제목+내용</option>
+                    <option value='T'>제목</option>
+                    <option value='C'>내용</option>
+                </select>
+                <input class='txtKeyWord' />
+                <input type='button' value='검색'/>
+            </div>
+        </li>
+    </div>
+
+    <div class="btn-layout">
+    <button onclick="location.href='/board/main'" class="btn-main">메인페이지 이동</button>
+    <button onclick="location.href='/board/upload'" class="btn-list">게시판 작성 페이지</button>
+    </div>
+
+
+</body>
+</html>

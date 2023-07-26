@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+</head>
+<style>
+    h1 {
+        margin: 0 auto;
+        padding: 20px 10px;
+        margin: 0;
+        background-color: aqua;
+    }
+
+    .title {
+        background-color: #dfe1e3;
+        padding: 15px 10px;
+        margin: 0;
+        font-size: 20px;
+        font-weight: bold;
+        border-bottom: 1px solid #635d5d;
+    }
+
+    .writer {
+        background-color: rgb(214, 130, 241);
+        padding: 8px 10px;
+        margin: 0;
+        border-bottom: 1px solid #635d5d;
+    }
+
+    .content {
+        background-color: rgb(92, 126, 199);
+        padding: 160px 10px;
+    }
+
+</style>
+<body>
+    <h1>공지사항</h1><br>
+
+    <p th:text="${board.erpTitle}" class="title">제목 들어갈부분</p>
+    <p th:text="${board.erpId}" class="writer">작성자</p>
+    <p th:text="${board.erpContent}" class="content">내용 들어갈부분</p>
+
+<!-- href : a태그에 경로를 걸 때 사용 / text : 태그에 문자열을 출력할 때 사용   -->
+
+    <a th:href="@{${board.erpFilepath}}">이미지 보기</a>
+    <a th:href="@{/board/list}" class="btn-list">목록</a>
+    <a th:href="@{/board/modify/{erpNum}(erpNum=${board.erpNum})}">수정</a>
+    <a th:href="@{/board/delete(erpNum=${board.erpNum})}">글 삭제</a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 내용</title>
+</head>
+<style>
+       .btn-main, .btn-list {
+
+            background-color: #82bbfb;
+            cursor: pointer;
+            color: #fff;
+            box-shadow: 0 0 40px 40px $blue inset, 0 0 0 0 $blue;
+            transition: all 150ms ease-in-out;
+        }
+</style>
+<body>
+
+    <h1 th:text="${board.erpTitle}">제목입니다.</h1>
+    <p th:text="${board.erpContent}">내용 들어갈부분</p>
+    <a th:href="@{/board/modify/{erpNum}(erpNum=${board.erpNum})}">수정</a>
+
+    <button onclick="location.href='/board/main'" class="btn-main">메인페이지</button>
+    <button onclick="location.href='/board/list'" class="btn-list">목록</button>
+
+</body>
+</html>

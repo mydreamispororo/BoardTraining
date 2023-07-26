@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 작성 페이지</title>
+</head>
+<style>
+    .layout {
+        width: 1500px;
+        margin: 100px auto;
+
+    }
+
+    table {
+      width: 100%;
+    }
+
+    tr {
+      height: 40px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+
+    }
+
+</style>
+<body>
+    <h1 class="board">게시판 작성 페이지</h1>
+
+    <div class="layout">
+        
+        <form action="/board/write" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>분류</td>
+                    <td>
+                      <select name="korBoardNotice" class="korBoardNotice">
+                        <option value="Y">공지</option>
+                        <option value="N" selected>일반</option>
+                      </select>
+                    </td>
+                </tr>
+                  <tr>
+                    <td>제목</td>
+                    <td>
+                        <input name="erpTitle" type="text" placeholder="제목을 입력하세요." class="title" maxlength="50">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>작성자</td>
+                    <td>
+                        <input name="erpId" type="text" placeholder="작성자를 입력하세요." class="id" maxlength="20">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>내용</td>
+                    <td>
+                        <textarea name="erpContent" placeholder="내용을 입력하세요." class="content"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>첨부파일</td>
+                    <td>
+                        <input type="file" class="btn-file" name="file" />
+                    </td>
+                  </tr>
+            </table>
+                <div>
+                    <button type="submit" class="btn-write">등록</button>
+                </div>
+                <div>
+                    <button onclick="location.href='/board/main'" class="btn-main">메인페이지</button>
+                    <button onclick="location.href='/board/list'" class="btn-list">목록</button>
+                </div>
+        </form>
+    </div>
+</body>
+</html>

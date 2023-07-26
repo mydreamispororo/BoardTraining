@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 작성 페이지</title>
+</head>
+<style>
+
+    .board {
+        height:20;
+        text-align: center;
+        background-color: #e6f1ff;
+    }
+
+    .layout {
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 40px;
+
+    }
+
+    .layout input {
+        width: 100%;
+        box-sizing: border-box;
+
+    }
+
+    .layout textarea {
+        width: 100%;
+        margin-top: 10px;
+        min-height: 300px;
+    }
+
+    .btn-main, .btn-list, .btn-write {
+
+        background-color: #82bbfb;
+        cursor: pointer;
+        color: #fff;
+        box-shadow: 0 0 40px 40px $blue inset, 0 0 0 0 $blue;
+        transition: all 150ms ease-in-out;
+    }
+
+
+
+
+</style>
+<body>
+    <h1 class="board">게시판 작성 페이지</h1>
+
+    <div class="layout">
+        <form th:action="@{/board/update/{erpNum}(erpNum=${board.erpNum})}" method="post">
+        작성자<input name="erpId" type="text" placeholder="작성자를 입력하세요." th:value="${board.erpId}" class="id">
+        제목<input name="erpTitle" type="text" placeholder="제목을 입력하세요." th:value="${board.erpTitle}" class="title">
+        내용<textarea name="erpContent" placeholder="내용을 입력하세요." th:text="${board.erpContent}" class="content"></textarea>
+        <button type="submit" class="btn-write">수정</button>
+
+<!-- th:value 뒤에 가져오는 board.epr~ 는 컨트롤러에 있는 model.addAttribute("board", boardService.boardView(erpNum)); 부분 board 를 가져오는 것임-->
+
+        </form>
+    </div>
+
+    <button onclick="location.href='/board/main'" class="btn-main">메인페이지</button>
+    <button onclick="location.href='/board/list'" class="btn-list">목록</button>
+</body>
+</html>
